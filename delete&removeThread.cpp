@@ -46,12 +46,14 @@ int DeleteNode(Bitree T, Bitree& p) {  //在二叉排序树中删除节点
         free(p);
     } else if(!p->lchild && p->rchild) { //要删除节点不存在左孩子
         //将要删除节点的右孩子移到要删除节点的位置
+        Bitree tem=p->rchild;
         Bitree tmpl = p->rchild->lchild, tmpr = p->rchild->rchild;
         p->data = p->rchild->data;
         p->lchild = tmpl;   //将右儿子的左右子树重接
         p->rchild = tmpr;
-        free(p->rchild);
+        free(tem);
     } else if(!p->rchild && p->lchild) {
+        Bitree tem=p->lchild;
         Bitree tmpl = p->lchild->lchild, tmpr = p->lchild->rchild;
 //        if(p->lchild->lchild == NULL && p->lchild->rchild == NULL)
 //            printf("%d", p->lchild->data);
@@ -60,7 +62,7 @@ int DeleteNode(Bitree T, Bitree& p) {  //在二叉排序树中删除节点
         p->rchild = tmpr;
 //        if(p->lchild == NULL && p->rchild == NULL)
 //            printf("%d", p->lchild->data);
-        free(p->lchild);
+        free(tem);
     } else { //两个孩子都有
         Bitree tmp = p, s = p->lchild;
         while(s->rchild) {        //选择左子树中的最右边的节点
