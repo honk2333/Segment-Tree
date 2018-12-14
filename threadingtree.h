@@ -29,5 +29,4 @@ void Travel_middle(Bitree T);
 void Travel_post(Bitree T);
 int FindPriorAndNext(Bitree T, Type &priorelem, Type &nextelem);
 int FindParent(Bitree T, Bitree& parent, BitNode *s);
-int FindParentOfX(Bitree T, Type x, Bitree& parent);
 int FindParentOfX(Bitree T, Bitree& parent);

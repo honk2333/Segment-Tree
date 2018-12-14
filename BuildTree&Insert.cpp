@@ -1,17 +1,36 @@
 #include"threadingtree.h"
+
+int Initree(Bitree &T, Type e) { //创建树
+    Bitree Root = (BitNode*)malloc(sizeof(BitNode)); //申请空间
+    if(!Root) {
+        return 0;
+    }
+    Root->data = e;
+    Root->lchild = NULL;
+    Root->rchild = NULL;
+    Root->prior = NULL;
+    Root->next = NULL;
+    T = Root;
+    return 1;
+}
+
 int BulidTree(Bitree& T)
 {
+    if(T){
+        printf("The tree has already been built\n");
+        return 0;
+    }
     int n;
     printf("How many numbers to input?\n");
     scanf("%d", &n);
-    printf("Please input the root Node\n");
+    printf("Please input the 1th Node\n");
     Type e;
     scanf("%d", &e);
     Initree(T, e);  //创建头节点
     for(int i = 2; i <= n; i++) {
-        printf("Please input %d th Node\n", i);
+        printf("Please input the %d th Node\n", i);
         scanf("%d", &e);
-        Insert(e, T);
+        if(Insert(e, T)==0) i--;
     }
     return 1;
 }
@@ -31,10 +50,11 @@ int Insert(Type e, Bitree& T) {
         } else {
             p -> rchild = s;
         }
-        return true;
+        return 1;
     } else {
         printf("The number has been existed\n");
-        return false;
+        getchar();
+        return 0;
     }
 }
 

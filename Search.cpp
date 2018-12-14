@@ -38,17 +38,6 @@ int FindParentOfX(Bitree T, Bitree& parent) {
 }
 int FindParent(Bitree T, Bitree& parent, BitNode *s) {  //在二叉排序树中查找节点的父亲节点
     BitNode *pre = NULL;
-//    while(T != s && T != NULL) {
-//        pre = T;
-//        T = T->lchild;
-//    }
-//    while(T != s && T != NULL) {
-//        pre = T;
-//        T = T->rchild;
-//    }
-    //printf("%d\n", T->data);
-    //printf("%d\n",s->data);
-
     if(T->data == s->data)
         return 0;   //根节点不存在父亲节点
     while(T->data != s->data && T != NULL) {
@@ -72,7 +61,7 @@ int FindParent(Bitree T, Bitree& parent, BitNode *s) {  //在二叉排序树中查找节点
 }
 
 int FindPriorAndNext(Bitree T, Type &priorelem, Type &nextelem) {   //利用线索寻找某种元素进行遍历时的前驱和后继
-                                                                      //将元素的前驱和后继存放在priorelem与nextelem中
+    //将元素的前驱和后继存放在priorelem与nextelem中
     Bitree B = T;
     printf("please input a number to be searched and print its prior and next:\n");
     Type e;
@@ -93,6 +82,7 @@ int FindPriorAndNext(Bitree T, Type &priorelem, Type &nextelem) {   //利用线索寻
                 printf("The prior element of %d is %d.\nand its next element is %d\n", e, priorelem, nextelem);
                 return 1;
             }
+            break;
         }
         B = B->next;
     }

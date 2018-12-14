@@ -2,34 +2,40 @@
 
 static BitNode* pre = NULL;
 static BitNode* tmp;
-static int tag = 1,fag=1;
-BitNode* CreatPostThread(Bitree &T) {
-     if(fag){
-        pre=NULL;
-        fag=0;
-    }
+static int tag = 1;
+BitNode* PostThread(Bitree &T) {
     if(!T) {
         return 0;
     }
     if(T) {
+        //printf("^%d", T->data);
+        //if(pre!=NULL) printf("$%d",pre->data);
         if(T->lchild) {
-            CreatPostThread(T->lchild);
+            PostThread(T->lchild);
         }
         if(T->rchild) {
-            CreatPostThread(T->rchild);
+            PostThread(T->rchild);
         }
         if(pre != NULL) {
             pre->next = T;
             T->prior = pre;
         }
-        if(tag) {
+        if(tag && pre == NULL) {
             tag = 0;
             tmp = T;
         }
         pre = T;
+        //pre->next=NULL;
     }
     return tmp;
 }
+
+BitNode* CreatPostThread(Bitree &T) {
+    pre = NULL;
+    tag = 1;
+    return PostThread(T);
+}
+
 
 static void Travel(Bitree T) {
     if(T != NULL) {
